@@ -29,4 +29,6 @@ config.json 文件和將您的discord token 填入
 
 "token" = 您的discord token
 
+## 關於backend_flask
 
+架在學校主機上，在此提供程式碼
