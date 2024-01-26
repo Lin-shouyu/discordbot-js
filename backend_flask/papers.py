@@ -16,7 +16,6 @@ from langchain.memory import ConversationBufferMemory
 app = Flask(__name__)
 
 # read local .env file
-#sys.path.append('../..')
 _ = load_dotenv(find_dotenv())
 openai.api_key = os.environ['OPENAI_API_KEY']
 
@@ -26,12 +25,6 @@ persist_directory = './papers/chroma/'
 vectordb = Chroma(persist_directory=persist_directory, embedding_function=embedding)
 
 def query(question):
-
-    # import os
-    # # 获取当前执行目录
-    # current_directory = os.getcwd()
-
-    # return current_directory
 
     memory = ConversationBufferMemory(
         memory_key="chat_history",
@@ -75,16 +68,11 @@ def query(question):
         if hasattr(source_doc, 'metadata'):
             source = source_doc.metadata.get('source', '未知')
             page = source_doc.metadata.get('page', '未知')
-            #print(f"搜索结果: {result['result']}\n来源: {source}, 页数: {page}")
             result['source'] = source
             result['page'] = page+1
-        # else:
-            # print("文档元数据未找到")
     else:
         result['source'] = None
         result['page'] = None
-    # else:
-        # print("没有找到源文档")
     return result 
 
 
