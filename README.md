@@ -22,3 +22,8 @@ node deploy-commands.js
 ```bash
 node .
 ```
+## 關於token
+
+請新增 
+.env文件和將您的discord token
+
