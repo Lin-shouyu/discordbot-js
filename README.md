@@ -1,6 +1,7 @@
 # Discord Bot 使用 JavaScript
 
  Discord Bot 知識機器人，使用 JavaScript 撰寫。
+ https://discord.js.org/
 
 ## 安裝
 
