@@ -6,7 +6,7 @@ module.exports = {
 		.setDescription('列出一些常見問題'),
 	async execute(interaction) {
 		const helpEmbed = new EmbedBuilder()
-			.setColor(0x0099ff) // 可以是任何颜色
+			.setColor(0x0099ff) 
 			.setTitle('常見問題一覽表')
 			.setDescription('歡迎使用廠務知識機器人，以下是機器人可以提供的所有功能介绍：')
 			.addFields(

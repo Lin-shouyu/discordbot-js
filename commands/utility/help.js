@@ -31,14 +31,11 @@ module.exports = {
 				{   name: '/highrequestion',
 					value: '顯示最常被搜尋的熱門問題。\n'+
 				'若您有問題不知道該如何下指令查詢也可以優先查看這裡。\n'}
-
-				// 添加更多的字段来描述每个命令
 			)
 			.setImage('https://th.bing.com/th/id/OIP.vcOCMRHDATaTcVgTEvi6ywHaG9?rs=1&pid=ImgDetMain')
 			.setTimestamp()
 			.setFooter({ text: '廠務知識機器人幫助指南', iconURL: 'https://th.bing.com/th/id/OIP.dK2HKDqjfr_dm1Mz4iLv0AHaEK?rs=1&pid=ImgDetMain' });
 
-		// 发送嵌入消息
 		await interaction.reply({ embeds: [helpEmbed] });
 	},
 };

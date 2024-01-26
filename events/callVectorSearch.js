@@ -7,7 +7,7 @@ async function executePythonScript(interaction, content, selectedValue,component
 
 	try {
 		const response = await axios.post(flask_url2+"/query_in_role_qa", {
-			question: content,  // 或其他適當的值
+			question: content,  
 			 selectedValue: selectedValue,    //option1 or option2
 		});
 		console.log('成功發送資料到 Flask API:', response.data['source'] , response.data['page']);

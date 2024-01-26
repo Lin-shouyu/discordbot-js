@@ -47,7 +47,7 @@ module.exports = {
 		}
 		else if (interaction.isModalSubmit()) {
 			if (interaction.customId === 'myModal') {
-				const selectedValue = userSelections; // 取得用戶選擇的模式 from 全域變數
+				const selectedValue = userSelections; 
 				const prompt1 = interaction.fields.getTextInputValue('prompt1');
 				const prompt2 = interaction.fields.getTextInputValue('prompt2');
 				modalContent = `${prompt1},${prompt2}`;
@@ -65,7 +65,7 @@ module.exports = {
 				const member = interaction.member;
 				const nickname = member.nickname || member.user.username;
 				console.log('selectedLabel', {selectedLabel});
-				userSelections = selectedLabel; //將用戶選擇的模式存入全域變數
+				userSelections = selectedLabel; 
 				await showModal(interaction);
 			}
 		}

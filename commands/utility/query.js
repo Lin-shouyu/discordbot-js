@@ -22,8 +22,8 @@ module.exports = {
 					.setDescription('只講重點，人狠話不多')
 					.setValue('option2'),
 				new StringSelectMenuOptionBuilder()
-					.setLabel('只按照文件回答')  // 只按照文件回答
-					.setDescription('忠誠的描述事實') //忠誠的描述事實
+					.setLabel('只按照文件回答')  
+					.setDescription('忠誠的描述事實') 
 					.setValue('option3'),
 
 
