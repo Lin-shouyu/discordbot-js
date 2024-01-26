@@ -22,3 +22,11 @@ node deploy-commands.js
 ```bash
 node .
 ```
+## 關於token
+
+請新增 
+config.json 文件和將您的discord token 填入
+
+"token" = 您的discord token
+
+
