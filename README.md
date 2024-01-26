@@ -15,8 +15,9 @@
 ```bash
 node deploy-commands.js
 
-
+```
 開始運行 Bot
 一旦你已經部署了指令，你可以使用以下指令啟動你的 Discord Bot：
-
+```bash
 node .
+```
