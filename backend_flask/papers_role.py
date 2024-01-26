@@ -45,6 +45,7 @@ def query(question,selectedValue):
             type="integer",
         ),
     ]
+    # 根據將傳入值輸入至prompt
 
     template = """ Use the following pieces of context to answer the question at the
     end.  Ensure the response is directly relevant to the question and grounded in the context. 

@@ -4,7 +4,7 @@ const { StringSelectMenuBuilder, StringSelectMenuOptionBuilder, SlashCommandBuil
 	TextInputStyle
 } = require('discord.js');
 
-module.exports = {
+module.exports = {//讓使用者選擇不同之對話風格
 	data: new SlashCommandBuilder()
 		.setName('roleqa')
 		.setDescription('提供不同的回答風格'),

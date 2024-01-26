@@ -17,9 +17,9 @@ let botReply = '';
 let modalContent = '';
 let userSelections = '';
 module.exports = {
-	name: Events.InteractionCreate,
+	name: Events.InteractionCreate,//處理各個事件
 	async execute(interaction) {
-		if (interaction.isChatInputCommand()) {
+		if (interaction.isChatInputCommand()) {//若找不到使用命令
 			const command = interaction.client.commands.get(interaction.commandName);
 
 			if (!command) {
@@ -45,7 +45,7 @@ module.exports = {
 				}
 			}
 		}
-		else if (interaction.isModalSubmit()) {
+		else if (interaction.isModalSubmit()) {//當接收到使用者提交modal
 			if (interaction.customId === 'myModal') {
 				const selectedValue = userSelections; 
 				const prompt1 = interaction.fields.getTextInputValue('prompt1');
@@ -53,23 +53,23 @@ module.exports = {
 				modalContent = `${prompt1},${prompt2}`;
 				const content = `${prompt1}, ${prompt2}`;
 				const row = createButtonRow();
-				botReply = await executePythonScript(interaction, content, selectedValue, [row]);
+				botReply = await executePythonScript(interaction, content, selectedValue, [row]);//將modal內容傳給api得到回覆
 			}
 		}
 		else if (interaction.isStringSelectMenu()) {
-			// 處理下拉選單
+			// 處理下拉選單 使用者選擇風格
 			if (interaction.customId === 'select') {
 				const selectedValue = interaction.values[0];
-				const selectedOption = selectMenuOptions.find(option => option.value === selectedValue);
+				const selectedOption = selectMenuOptions.find(option => option.value === selectedValue);//處理使用者選擇了哪個風格按鈕
 				const selectedLabel = selectedOption ? selectedOption.label : '未知選項';
 				const member = interaction.member;
 				const nickname = member.nickname || member.user.username;
 				console.log('selectedLabel', {selectedLabel});
 				userSelections = selectedLabel; 
-				await showModal(interaction);
+				await showModal(interaction); //呼叫modal給使用者填寫表單
 			}
 		}
-		else if (interaction.isButton()) {
+		else if (interaction.isButton()) { //當使用者點擊回復按鈕
 			const userInfo = {
 				nickname: interaction.member.nickname || interaction.user.username,
 				modalContent: modalContent,
@@ -79,7 +79,7 @@ module.exports = {
 			};
 			let responseMessage = botReply;
 			console.log('responseMessage', responseMessage);
-			await textSave(userInfo);
+			await textSave(userInfo); //將使用者提問 回復 回復回饋存入json
 			if (interaction.customId === 'useful') {
 				responseMessage += `\n很高興您滿意這次的回答，下次見！`;
 				await interaction.update({ content: responseMessage, components: [] });
@@ -87,10 +87,12 @@ module.exports = {
 			else if (interaction.customId === 'useless') {
 				responseMessage += `\n感謝您的回饋，我們會持續精進系統！`;
 				await interaction.update({ content: responseMessage, components: [] });
+
 			}
 			else if (interaction.customId === 'continue') {
-				responseMessage += `\n謝謝！`;
+				responseMessage += `\n謝謝！`; //將原本機器人回答再各個按鈕不同回答
 				await interaction.update({ content: responseMessage, components: [] });
+
 			}
 		}
 	},

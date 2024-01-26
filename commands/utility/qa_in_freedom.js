@@ -15,19 +15,20 @@ module.exports = {
 		await interaction.deferReply({ ephemeral: true});
 		const userInput = interaction.options.getString('input');
 		const row = createButtonRow();
-		// You can now use this string to perform your query with flask
+		//向flask發送請求
 		try {
 			const response = await axios.post(flask_url2+"/query", {
 				question: userInput,  // 或其他適當的值
 			});
 
 			console.log('成功發送資料到 Flask API:', response.data['source'] , response.data['page']);
-			await interaction.editReply( {content :`The result is : ${response.data['result']}  \n
+			//回復使用者
+			await interaction.editReply( {content :`The result is : ${response.data['result']}  \n  
 			The doc source is : ${response.data['source']}
 			The doc page is : ${response.data['page']}` ,
 				components: [row]});
 
-		} catch (error) {
+		} catch (error) {//若請求失敗列出錯誤訊息
 			console.error('發送 POST 請求時出錯:', error.message);
 			await interaction.editReply('Error uploading file.');
 		}

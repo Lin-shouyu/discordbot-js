@@ -1,6 +1,6 @@
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
-function createButtonRow() {
+function createButtonRow() { //使用者意見反饋按鈕
 	const row = new ActionRowBuilder()
 		.addComponents(
 			new ButtonBuilder()
