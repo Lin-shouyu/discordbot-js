@@ -53,7 +53,7 @@ module.exports = {
 				modalContent = `${prompt1},${prompt2}`;
 				const content = `${prompt1}, ${prompt2}`;
 				const row = createButtonRow();
-				botReply = await executePythonScript(interaction, content, selectedValue, [row]);//將modal內容傳給api得到回覆
+				botReply = await executePythonScript(interaction, content,doc_name, selectedValue, [row]);//將modal內容傳給api得到回覆
 			}
 		}
 		else if (interaction.isStringSelectMenu()) {
