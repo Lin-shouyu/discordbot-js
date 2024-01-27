@@ -23,7 +23,7 @@ embeddings = OpenAIEmbeddings()
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=100, chunk_overlap=50)
 persist_directory = './final_test/chroma/'
 vectordb = Chroma(persist_directory=persist_directory, embedding_function=embeddings)
-
+#用以建立的向量資料庫做查詢
 def query(question,selectedValue, doc_name):
 
     #儲存格式問題必續這樣寫
@@ -41,7 +41,7 @@ def query(question,selectedValue, doc_name):
     qa_chain_prompt = PromptTemplate.from_template(template13)
     document_content_description = "papers"
     llm = OpenAI(model='gpt-3.5-turbo-instruct', temperature=0)
-
+    #如果有給予檔案名稱，retriever會址搜尋特定文件
     if doc_name!= "./final_test\\":
         retriever=vectordb.as_retriever(
                 search_kwargs={'filter':{'source':doc_name}}
@@ -74,10 +74,12 @@ def query(question,selectedValue, doc_name):
     
     return result
 
+
+#若有新增資料 計算新的向量跟向量資料庫
 def process_pdf(file_name, directory):
     loader = PyPDFLoader(os.path.join(directory, file_name))
     doc = loader.load()
     doc_split = text_splitter.split_documents(doc)
     vectordb.add_documents(doc_split)
-    vectordb.persist()
+    vectordb.persist()#更新向量資料庫
 

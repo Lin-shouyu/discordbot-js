@@ -23,7 +23,7 @@ openai.api_key = os.environ['OPENAI_API_KEY']
 embedding = OpenAIEmbeddings()
 persist_directory = './papers/chroma/'
 vectordb = Chroma(persist_directory=persist_directory, embedding_function=embedding)
-
+#用以建立的向量資料庫做查詢
 def query(question):
 
     memory = ConversationBufferMemory(
@@ -53,7 +53,7 @@ def query(question):
     qa_chain_prompt = PromptTemplate(input_variables=["context", "question"], template=template, )
 
     llm = OpenAI(model='gpt-3.5-turbo-instruct', temperature=0)
-    # Run chain
+    # Run chain   
     qa_chain = RetrievalQA.from_chain_type(
         llm,
         retriever=vectordb.as_retriever(),
