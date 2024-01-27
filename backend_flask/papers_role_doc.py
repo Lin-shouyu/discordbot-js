@@ -58,19 +58,16 @@ def query(question,selectedValue, doc_name):
     )
    
 
-    # print("papers.py: prompt_template is ready.")
+
     result = qa_chain({"query": question})
     if 'source_documents' in result and result['source_documents']:
         # 获取第一个文档的元数据
         source_doc = result['source_documents'][0]
-        if hasattr(source_doc, 'metadata'):
+        if hasattr(source_doc, 'metadata'): #若未找到檔案 將來源和頁數改為未知
             source = source_doc.metadata.get('source', '未知')
             page = source_doc.metadata.get('page', '未知')
-            #print(f"搜索结果: {result['result']}\n来源: {source}, 页数: {page}")
             result['source'] = source
             result['page'] = page+1
-        # else:
-            # print("文档元数据未找到")
     else:
         result['source'] = None
         result['page'] = None
