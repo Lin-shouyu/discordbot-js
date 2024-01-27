@@ -1,0 +1,8 @@
+{
+    "compilerOptions": {
+        "baseUrl": "src"
+    },
+    
+    "flask_url": "http://140.120.14.105:5000/api/get/docinfo"
+
+}
