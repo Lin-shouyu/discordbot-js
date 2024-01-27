@@ -16,10 +16,14 @@ def index():
 def query_from_llm():
     question = request.get_json()
     result = papers.query(question['question'])  # 调用 query 函数
-    # 以json方式回傳
-    return jsonify({'result': result['result'] , 'source': result['source'] , 'page': result['page']}) 
-
-
+    sauce = result['source']
+    substring_to_remove = "file/"
+    if sauce is not None and substring_to_remove in sauce:
+        sauce = sauce.replace(substring_to_remove, "")
+    substring_to_remove = "./final_test\\"
+    if sauce is not None and substring_to_remove in sauce:
+        sauce = sauce.replace(substring_to_remove, "")
+    return jsonify({'result': result['result'] , 'source':sauce , 'page': result['page']})
 #可根據檔案名稱指定查詢文件
 @app.route('/query_in_role_qa_doc', methods=['POST']) 
 def query_in_role_qa_doc():

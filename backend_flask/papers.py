@@ -16,15 +16,24 @@ from langchain.memory import ConversationBufferMemory
 app = Flask(__name__)
 
 # read local .env file
+#sys.path.append('../..')
 _ = load_dotenv(find_dotenv())
 openai.api_key = os.environ['OPENAI_API_KEY']
 
 # Load existing vectordb
 embedding = OpenAIEmbeddings()
-persist_directory = './papers/chroma/'
+
+# persist_directory = './papers/chroma/'
+persist_directory = './final_test/chroma/'
 vectordb = Chroma(persist_directory=persist_directory, embedding_function=embedding)
-#用以建立的向量資料庫做查詢
+
 def query(question):
+
+    # import os
+    # # 获取当前执行目录
+    # current_directory = os.getcwd()
+
+    # return current_directory
 
     memory = ConversationBufferMemory(
         memory_key="chat_history",
@@ -53,7 +62,7 @@ def query(question):
     qa_chain_prompt = PromptTemplate(input_variables=["context", "question"], template=template, )
 
     llm = OpenAI(model='gpt-3.5-turbo-instruct', temperature=0)
-    # Run chain   
+    # Run chain
     qa_chain = RetrievalQA.from_chain_type(
         llm,
         retriever=vectordb.as_retriever(),
@@ -68,11 +77,16 @@ def query(question):
         if hasattr(source_doc, 'metadata'):
             source = source_doc.metadata.get('source', '未知')
             page = source_doc.metadata.get('page', '未知')
+            #print(f"搜索结果: {result['result']}\n来源: {source}, 页数: {page}")
             result['source'] = source
             result['page'] = page+1
+        # else:
+            # print("文档元数据未找到")
     else:
         result['source'] = None
         result['page'] = None
+    # else:
+        # print("没有找到源文档")
     return result 
 
 
